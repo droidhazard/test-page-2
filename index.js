@@ -38,4 +38,10 @@ app.post("/file", (request, response) => {
     // You can further process the screenshotBlob data here
   })();
 });
+
+app.post("/file1", (request, response) => {
+  let screenshotData = "0";
+  response.send({ id: 0 });
+  // You can further process the screenshotBlob data here
+});
 // h
