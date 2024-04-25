@@ -1,4 +1,4 @@
-async function takePDFScreenshot(url, waitTime = 15000) {
+async function takePDFScreenshot(url, waitTime = 1000) {
   // Milliseconds
   const puppeteer = require("puppeteer");
 
@@ -8,20 +8,13 @@ async function takePDFScreenshot(url, waitTime = 15000) {
   await page.goto(url);
   await new Promise((resolve) => setTimeout(resolve, waitTime));
 
-  const filename = `screenshot-${Date.now()}.png`; // Generate unique filename
-
-  await page.screenshot({ path: filename }); // Save screenshot to a file
-
-  const imageBuffer = fs.readFileSync(filename); // Read file as buffer
+  const screenshotData = await page.screenshot({ type: "png" }); // Capture screenshot as PNG buffer
 
   await browser.close();
-  await fs.promises.unlink(filename); // Clean up temporary file
 
-  return imageBuffer; // Return the image buffer data
+  return screenshotData;
+  // return new Blob([screenshotData], { type: "image/png" }); // Return screenshot data as Blob
 }
-
-// Include the 'fs' module for file operations
-const fs = require("fs");
 
 // Export the function to be used in other modules
 module.exports = takePDFScreenshot;

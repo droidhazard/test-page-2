@@ -25,7 +25,7 @@ app.post("/file", (request, response) => {
   const url = request.body.file_url;
   let screenshotData = "0";
   (async () => {
-    screenshotData = await takePDFScreenshot(url, 15000);
+    screenshotData = await takePDFScreenshot(url, 1000);
     response.setHeader("Content-Type", "image/png");
     // console.log(screenshotData);
 
