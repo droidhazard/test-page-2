@@ -22,13 +22,10 @@ app.post("/file", (request, response) => {
   //   "https://file-examples.com/wp-content/storage/2017/10/file-example_PDF_500_kB.pdf",
   //   10000
   // );
-  // const url = request.body.file_url;
+  const url = request.body.file_url;
   let screenshotData = "0";
   (async () => {
-    screenshotData = await takePDFScreenshot(
-      "https://file-examples.com/wp-content/storage/2017/10/file-example_PDF_500_kB.pdf",
-      1000
-    );
+    screenshotData = await takePDFScreenshot(url, 10000);
     response.setHeader("Content-Type", "image/png");
     // console.log(screenshotData);
 
